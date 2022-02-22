@@ -1,0 +1,93 @@
+<%- include("../partials/head",{title:"Home"})  %> 
+<%- include("../partials/menuHeader.ejs")  %>  
+    <!-- Seccion del carrusel -->
+    <section class="carrouselSection">
+        <!-- contenedor de box-imagenes -->
+        <div class="contenedor-imagenes-carruselHome">
+            <!-- imagenes del carrusel -->
+            <ul>
+                <li><img src="img/header2.jpg" alt="Images1"></li>
+                <li><img src="img/jugueteria_gugu.png" alt="images2"></li>
+                <li><img src="img/carrusel-navidad.png" alt="images1" alt="images3"></li>
+            </ul>
+        </div>
+    </section>
+    <!-- seccion de iconos edades y ofertas -->
+    <section class="contGeneral">
+        <article class="bannerInfoHome">
+            <!-- contenedor truck card dollars -->
+                <div> 
+                    <i class="fas fa-truck"></i> 
+                    <div>
+                        <h5>ENVIOS A TODO EL PAIS</h5>
+                        <p>costo bajos</p>
+                    </div>            
+                </div>
+                <div>
+                    <i class="far fa-credit-card"></i> 
+                    <div>
+                        <h5>TODOS LOS MEDIOS DE PAGO</h5>
+                        <p>Crédito y débito</p>
+                    </div>
+                </div>
+                <div>
+                    <i class="fas fa-dollar-sign"></i>
+                    <div>
+                        <h5>20% OFF</h5>
+                        <p>Pagando en efectivo</p>
+                    </div>
+                </div>                
+            </div>
+        </article>
+        <!-- Productos por edades -->
+        <article class="categoriasHome">
+            <h3>BUSCÁ POR EDADES</h3>
+                <div class="contenedor-imgHome">
+                    <div>
+                        <div class="catImgHome">
+                            <img src="img/icons/img/baby_0_24.jpg" alt="de 0 a 24">
+                        </div>
+                        <h4>DE 0 A 24 MESES</h4>
+                    </div>
+                    <div>
+                        <div class="catImgHome">
+                            <img src="img/icons/img/edad_2_3.jpg" alt="de 2 a 3">
+                        </div>
+                        <h4>DE 2 A 3 AÑOS</h4>
+                    </div>
+                    <div>
+                        <div class="catImgHome">
+                            <img src="img/icons/img/de_4_6.jpg" alt="de 4 a 6">
+                        </div>
+                        <h4>DE 4 A 6 AÑOS</h4>
+                    </div>  
+                </div>
+                <h3>MÁS POPULARES</h3>
+                <div class="contenedor-imgHome">
+                    <div>
+                        <div class="catImgHome">
+                            <img src="img/icons/img/toys1.jpg" alt="boligrafo Multicolor" class="imagenes-edades">
+                        </div>
+                        <h4>BOLIGRAFO MULTICOLOR</h4>
+                        <p>$1300 | 20% OFF</p>
+                    </div>
+                    <div>
+                        <div class="catImgHome">
+                            <img src="img/icons/img/michal-bozek-RcxR1aLw8X0-unsplash.jpg" alt="cubo de madera" class="imagenes-edades">
+                        </div>
+                        <h4>CUBO DE MADERA</h4>
+                        <p>$3900 | 10% OFF</p>
+                    </div>
+                    <div>
+                        <div class="catImgHome">
+                            <img src="img/icons/img/trenes.jpg" alt="tren de madera" class="imagenes-edades">
+                        </div>
+                        <h4>TREN DE MADERA</h4>
+                        <p>$3299 | 45% OFF</p>
+                    </div> 
+                </div>               
+        </article>
+        <!-- <article class="contenidos"></article> -->
+    </section>
+    <!-- footer -->
+<%- include("../partials/footerBase.ejs")  %>

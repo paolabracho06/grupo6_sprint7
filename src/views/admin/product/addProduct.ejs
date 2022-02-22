@@ -1,0 +1,46 @@
+<%- include("../../partials/head.ejs",{title:"Añadir producto"}) %>
+</head>
+<body>
+        <%- include("../../partials/menuHeader.ejs") %>
+            <div class="contGeneral contAdd">
+                <form class="adminAddProductForm" action="/products" method="post" enctype="multipart/form-data">
+                    <h3>Agregar nuevo producto</h3>
+                    <input placeholder="Nombre del producto" name="name" type="text">
+                    <input placeholder="Precio invividual" type="number" name="price_inv">
+                    <input placeholder="Precio mayorista" type="number" name="price_who">
+                    <input placeholder="Stock" type="number" name="stock">
+                    <input placeholder="Stock minimo" type="number" name="stock_min">
+                    <input placeholder="Stock maximo" type="number" name="stock_max">
+                    <select name="category" id="">
+                        <option value="">Seleccionar una categoría</option>
+                        <% for( let i = 0; i < category.length; i++ ) { %>
+                            <option value="<%= category[i].id %>"><%= category[i].name %></option>
+                        <% } %>
+                    </select>
+                    <select name="size" id="">
+                        <option value="">Seleccionar un tamaño</option>
+                        <% for( let i = 0; i < size.length; i++ ) { %>
+                            <option value="<%= size[i].id %>"><%= size[i].size %></option>
+                        <% } %>
+                    </select>
+                    <select name="discount" id="">
+                        <option value="">Seleccione un Descuento</option>
+                        <% for( let i = 0; i < discount.length; i++ ) { %>
+                            <option value="<%= discount[i].id %>"><%= discount[i].discount %>%</option>
+                        <% } %>
+                    </select>
+                    <select name="visibility" id="">
+                        <option value="">Seleccione una opcion</option>
+                        <option value="1">Visible</option>
+                        <option value="0">No visible</option>
+                    </select>
+                    <div>
+                        <label for="">Subir imagen</label>
+                        <input type="file" name="img" id="">
+                    </div>
+                    <textarea placeholder="Descripcion" name="description" id="" cols="30" rows="10"></textarea>
+                    <input type="submit" name="" id="" value="Crear Producto">
+                </form>
+            </div>
+        </section>
+<%- include("../../partials/footerBase.ejs") %>

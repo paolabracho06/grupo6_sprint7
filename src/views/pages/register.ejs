@@ -1,0 +1,49 @@
+<%- include("../partials/head.ejs",{title:'Registro'})  %> 
+<%- include("../partials/menuHeader.ejs")  %> 
+    <div class="contRegisTitu">
+        <h3>Bienvenido!</h3>
+        <div>
+            <img src="img/oso.png" alt="oso">
+        </div>
+    </div>
+    <!--REGISTRO-->
+    <section class="detailregister">
+        <div class="contregist">
+            <div class="contRE">
+                <%if(locals.errors) { %>
+                    <% for(let item in errors){ %> 
+                        <p><%= errors[item].msg %> </p>
+
+                    <% } %> 
+                <% } %> 
+                <form class="registerForm" action="/register" method="POST">
+                    <input type="text" placeholder="Nombre" name="first_name" id="first_name" value="<%= locals.oldData? locals.oldData.first_name:null %>"require/>
+                    <% if (locals.errors && locals.errors.nombre) { %>
+                        <p class="errForm"><%= locals.errors.nombre.msg %></p>
+                    <% } %>
+                    <input type="text" placeholder="Apellido" name="last_name" id="last_name" value="<%= locals.oldData? locals.oldData.last_name:null %>"require/>
+                    <% if (locals.errors && locals.errors.nombre) { %>
+                        <p class="errForm"><%= locals.errors.nombre.msg %></p>
+                    <% } %>
+                    <input type="email" placeholder="Email" name="email" id="email"  value="<%= locals.oldData? locals.oldData.email:null %>"require/>
+                    <% if (locals.errors && locals.errors.email) { %>
+                        <p class="errForm"><%= locals.errors.email.msg %></p>
+                    <% } %>
+                    <input type="password" placeholder="Contraseña" name="pass" id="contrasenia" require/> 
+                    <input type="password" placeholder="Confirmar contraseña" name="pass1" id="contrasenia1"require/>
+                    <% if (locals.errors && locals.errors.pass) { %>
+                        <p class="errForm"><%= locals.errors.pass.msg %></p>
+                    <% } %>
+                    <select name="rol" id="categoria">
+                        <option value="3">comprador</option>
+                        <option value="2">mayorista</option>
+                    </select>
+                    <input type="submit" value="REGISTRARSE">
+                    <p class="registerFormPregunta">¿Ya tenés una cuenta? <a href="/login">Iniciar sesión</a></p>
+                </form>
+            </div>
+            
+        </div>
+    </section>
+    <!--REGISTRO-->
+<%- include("../partials/footerBase.ejs")  %> 

@@ -1,0 +1,18 @@
+.quienesSomosCont > h3{
+    text-align: center;
+    font-size: 1rem;
+    margin: 3px 0;
+    margin-bottom: 100px;
+}
+.somosLogo{
+    width: 50%;
+    margin: 0 auto;
+}
+.somosLogo > img{
+    width: 100%;
+}
+@media only screen and (min-width: 768px){
+    .somosLogo{ width: 30%;}
+}
+@media only screen and (min-width: 1024px){
+}

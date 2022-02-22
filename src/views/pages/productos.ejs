@@ -1,0 +1,80 @@
+<%- include ('../partials/head',{title:"Productos"}) %>
+<%- include('../partials/menuHeader')  %>
+    <section class="filter-products">
+        <div class="ordenar-productos-container">
+            <div class="ordenar-products">
+                <label for="ordenar-productos-lista">Ordenar por:</label>
+                <select name="lista-opciones-prductos" id="li-products">
+                    <option value="destacado">Destacados</option>
+                    <option value="menorMayor">Precio: Menor a Mayor</option>
+                    <option value="mayorMenor">Pecio: Mayor a Menor</option>
+                    <option value="vendidos">Mas vendidos</option>
+                </select>
+            </div>
+            <div class="filter-phone">
+                <h3><a href="#">Filtrar ></a></h3>
+            </div>   
+        </div>
+    </section>
+    <section class="filter-products-desktop">
+        <div class="ordenar-productos-container">
+            <div class="ordenar-products">
+                <label for="ordenar-productos-lista">Ordenar por:</label>
+                <select name="lista-opciones-prductos" id="li-products">
+                    <option value="destacado">Destacados</option>
+                    <option value="menorMayor">Precio: Menor a Mayor</option>
+                    <option value="mayorMenor">Pecio: Mayor a Menor</option>
+                    <option value="vendidos">Mas vendidos</option>
+                </select>
+            </div>
+        </div>
+    </section>
+    <section class="products-lista">
+        <article class="products-lista-categorias-desktop">
+            <h2>Juguetes</h2>
+            <div class="contenedor-categorias-lista">
+                <ul>
+                    <li><a href="#"> de 1 a 3 años</a></li>
+                    <li><a href="#"> de 3 a 6 años</a></li>
+                    <li><a href="#">Jueguetes de 6 a 8 años</a></li>
+                    <li><a href="#">Juegutes de Madera</a></li>
+                    <li><a href="#">Jueguetes didacticos</a></li>
+                    <li><a href="#">Rompecabezas</a></li>
+                    <li><a href="#">Laberintos</a></li>
+                    <li><a href="#">Bloques</a></li>
+                    <li><a href="#">Pizarras</a></li>
+                </ul>
+            </div>
+        </article>
+        <article class="products-lista-articulos">
+            <% db.forEach(element => { %>
+                <div class="products-lista-articulos-contenedor_producto">
+                        <a href="/products/detail/<%= element.id %>">
+                        <% for(let i = 0; i<element.images.length;i++){ %>
+                            <img src="/img/products/<%= element.images[i].image %> " alt="articulox">
+                        <% } %> 
+                        <div class="contenedor-producto-info">
+                            <p><%= element.name %> </p>
+                            <% if(access == 3 || !access){ %> 
+                                <p>$<%= element.price_inv %> </p>
+                            <% } %> 
+                            <% if(access == 2){ %> 
+                                <p>$<%= element.price_who %> </p>
+                            <% } %> 
+                            <% if(access == 1){ %> 
+                                <p>Individual $<%= element.price_who %> </p>
+                                <p>Mayorista $<%= element.price_inv %> </p>
+                            <% } %> 
+                        </div>
+                        <% if (element.offPorcen) { %>
+                            <div class="contenedor-producto-cuota">
+                                <p>Hasta <%=element.offPorcen%>% de descuento  </p>
+                            </div>
+                            <% } else { %><% } %> 
+                            
+                        </a>
+                        </div>
+            <% }) %>
+        </article>
+    </section>
+<%- include('../partials/footerBase')  %> 

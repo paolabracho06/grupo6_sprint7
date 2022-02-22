@@ -1,0 +1,90 @@
+<%- include ('../partials/head',{title:"Detalle del producto"}) %> 
+<%- include("../partials/menuHeader.ejs")  %>  
+    <section class="prinDetail">
+        <img class="imgDetail" src="/img/products/<%= articulo.images[0].dataValues.image %>" alt="">
+        <div>
+            <h3 class="titleDetail"><%= articulo.name %> </h3>
+            <div class="priceDetail"> 
+                <% if(access == 1){ %> 
+                    <h4>Individual $<%= articulo.price_inv %> </h4>
+                    <h4>Mayorista $<%= articulo.price_who %> </h4>
+                <% } %> 
+                <% if(access == 2){ %> 
+                    <h4>$<%= articulo.price_who %> </h4>
+                <% } %> 
+                <% if(access == 3 || !access){ %> 
+                    <h4>$<%= articulo.price_inv %> </h4>
+                <% } %> 
+            </div>
+            <a href="/carrito"><div class="carritoDetail">AÑADIR AL CARRITO</div></a>
+            <% if(user && access == 1){ %> 
+            <h4>Acciones</h4>
+            <div class="buttonAccionDivDetail">
+                <a href="/products/<%= articulo.id %>/edit "><div class="buttonAcDetail">EDITAR</div></a>
+                <form class="buttonEliminar" action="/products/<%= articulo.id %>/delete?_method=DELETE" method="post">
+                    <input type="submit" value="ELIMINAR">
+                </form>
+            </div>
+            <% } %> 
+            <!-- <div class="compartirDetail">
+                <i class="fab fa-facebook-square"></i>
+                <i class="fab fa-instagram"></i>
+            </div> -->
+        </div>
+        <div class="infoDetail">
+            <h4>Informacion adicional</h4>
+            <p><%= articulo.description %> </p>
+            <p class="infoSizeDetail">
+                <span>Tamaño:</span> <%= articulo.sizes.dataValues.size %> 
+            </p>
+            <p class="infoSizeDetail">
+                <span>Categoría:</span> <a href="/products/cats/<%= articulo.cats.dataValues.id %> "><%= articulo.cats.dataValues.name %></a>
+            </p>
+        </div>
+        <div class="pagosDetail">
+            <h4>Metodos de pago</h4>
+            <div>
+                <i class="fas fa-file-alt"></i>
+                <p>3 cuotas sin interés con todas las tarjetas.</p>
+                <p>5% off con transferencia.</p>
+                <p>Efectivo por pago fácil ó rapipago</p>
+            </div>
+            <h4>Envios</h4>
+            <div>
+                <i class="fas fa-truck"></i>
+                <p>A domicilio en todo el país.</p>
+                <p>Envios FLASH en caba</p>
+            </div>
+        </div>
+    </section>
+    <section class="relacionados">
+        <div class="relaProduct">
+            <h3>PRODUCTOS RELACIÓNADOS</h3>
+            <div class="relaProImage">
+                <div class="relaCarrousel relaCarrouselLeft"><i class="fas fa-arrow-alt-circle-left"></i></div>
+                <img src="/img/products/trenes.jpg" alt="tren de madera">
+                <div class="relaCarrousel relaCarrouselRight"><i class="fas fa-arrow-alt-circle-right"></i></div>
+            </div>
+            <div class="relaProImage oculto">
+                <div class="relaCarrousel relaCarrouselLeft"><i class="fas fa-arrow-alt-circle-left"></i></div>
+                <img src="/img/products/trenes.jpg" alt="tren de madera">
+                <div class="relaCarrousel relaCarrouselRight"><i class="fas fa-arrow-alt-circle-right"></i></div>
+            </div>
+            <div class="relaProImage oculto">
+                <div class="relaCarrousel relaCarrouselLeft"><i class="fas fa-arrow-alt-circle-left"></i></div>
+                <img src="/img/products/trenes.jpg" alt="tren de madera">
+                <div class="relaCarrousel relaCarrouselRight"><i class="fas fa-arrow-alt-circle-right"></i></div>
+            </div>
+            <div class="relaProImage oculto">
+                <div class="relaCarrousel relaCarrouselLeft"><i class="fas fa-arrow-alt-circle-left"></i></div>
+                <img src="/img/products/trenes.jpg" alt="tren de madera">
+                <div class="relaCarrousel relaCarrouselRight"><i class="fas fa-arrow-alt-circle-right"></i></div>
+            </div>
+            <div class="relaProImage oculto">
+                <div class="relaCarrousel relaCarrouselLeft"><i class="fas fa-arrow-alt-circle-left"></i></div>
+                <img src="/img/products/trenes.jpg" alt="tren de madera">
+                <div class="relaCarrousel relaCarrouselRight"><i class="fas fa-arrow-alt-circle-right"></i></div>
+            </div>
+        </div>
+    </section>
+<%- include("../partials/footerBase.ejs")  %>

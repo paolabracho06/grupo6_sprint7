@@ -1,0 +1,105 @@
+<%- include("../../partials/head.ejs",{title:"Modificar producto"}) %>
+  <div class="changeProduct1">
+        <%- include("../../partials/admHeader.ejs") %>
+
+    <div class="changeProduct2">
+        <form action="/products/<%= productoEncontrado.id %>/edit?_method=PUT" method="POST" enctype="multipart/form-data">
+
+            <section class="changeProductFile">
+                <div class="form-changeProduct">                        
+                    <h2>Foto actual del Producto</h2>
+                    <img src="/img/products/<%= image.image %>" alt="<%= productoEncontrado.name%>" width="300px" height="300px">
+                    <label for="photo">cambiar img del producto</label>
+                    <input type="file" name="img" accept=".jpg" value=""> 
+                </div>
+            </section>
+
+            <section class="changeProductButtons">
+                <div class="form-changeProduct">
+                    <label for="name">Nombre del producto</label>
+                    <input type="text" name="name" id="name" value="<%= productoEncontrado.name %>" required>
+                </div>     
+                <div class="form-changeProduct">
+                    <label for="price_inv">Precio Inidividual</label>
+                    <input type="text" name="price_inv" id="price_inv" value="<%= productoEncontrado.price_inv %>" required>
+                </div>
+                <div class="form-changeProduct">
+                    <label for="price_who">Precio Mayorista</label>
+                    <input type="text" name="price_who" id="price_who" value="<%= productoEncontrado.price_who %>" required>
+                </div>
+
+                <div class="form-changeProduct">
+                    <label for="size">Selecionar tamaño</label>
+                    <select name="size" id="size">
+                        <option value="">Seleccionar un tamaño</option>
+                        <% for( let i = 0; i < size.length; i++ ) { %>
+                            <% if (size[i].id == productoEncontrado.size_id) { %>
+                                <option value="<%= size[i].id %>" selected><%= size[i].size %></option>
+                            <% }else{ %>
+                                <option value="<%= size[i].id %>"><%= size[i].size %></option>
+                            <% } %> 
+                        <% } %>
+                    </select>
+                </div>
+                <div class="form-changeProduct">
+                    <label for="category">Seleccionar categoría</label>
+                    <select name="category" id="category">
+                        <option value="">Seleccionar una categoría</option>
+                        <% for( let i = 0; i < category.length; i++ ) { %>
+                            <% if (category[i].id == productoEncontrado.cat_id) { %>
+                                <option value="<%= category[i].id %>" selected><%= category[i].name %></option>
+                            <% }else{ %>
+                                <option value="<%= category[i].id %>"><%= category[i].name %></option>
+                            <% } %> 
+                            <% } %>
+                        </select>
+                </div>
+                <div class="form-changeProduct">
+                    <label for="discount">Seleccionar descuento</label>
+                    <select name="discount" id="discount">
+                        <option value="">Seleccionar un descuento</option>
+                        <% for( let i = 0; i < discount.length; i++ ) { %>
+                            <% if (discount[i].id == productoEncontrado.discount_id) { %>
+                                <option value="<%= discount[i].id %>" selected><%= discount[i].discount %>%</option>
+                            <% }else{ %>
+                                <option value="<%= discount[i].id %>"><%= discount[i].discount %>%</option>
+                            <% } %> 
+                        <% } %>
+                    </select>
+                </div>
+                <div class="form-changeProduct">
+                    <label for="stock">Stock</label>
+                    <input type="text" id="stock" name="stock" placeholder="Stock actual" value="<%= productoEncontrado.stock %>" required>
+                </div>   
+                <div class="form-changeProduct">
+                    <label for="stock_min">Stock minimo</label>
+                    <input type="text" id="stock_min" name="stock_min" placeholder="Stock minimo" value="<%= productoEncontrado.stock_min %>" required>
+                </div>   
+                <div class="form-changeProduct">
+                    <label for="stock_max">Stock maximo</label>
+                    <input type="text" id="stock_max" name="stock_max" placeholder="Stock maximo" value="<%= productoEncontrado.stock_max %>" required>
+                </div> 
+                <div class="form-changeProduct">
+                    <label for="visibility">Visibilidad</label>
+                    <select name="visibility" id="visibility">
+                        <option value="">Seleccionar visibilidad</option>
+                        <% if(productoEncontrado.visibility == 1){ %>
+                            <option value="1" selected>Visible</option>
+                            <option value="0">No visible</option>
+                        <% }else{ %>  
+                            <option value="1">Visible</option>
+                            <option value="0" selected>No visible</option>
+                        <% } %>  
+                    </select>
+                </div> 
+                <div class="form-changeProduct">
+                    <label for="description">Descripción</label>
+                    <textarea name="description" id="description" cols="30" rows="10"><%= productoEncontrado.description %></textarea>
+                </div>    
+                <button type="submit">Guardar cambios</button>
+            </section>
+
+        </form>
+    </div>
+    </div>
+<%- include("../../partials/footerAdmin.ejs") %>

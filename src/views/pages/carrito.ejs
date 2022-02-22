@@ -1,0 +1,106 @@
+<%- include("../partials/head",{title:"Carrito"})  %> 
+<%- include("../partials/menuHeader.ejs")  %>  
+<section class="carrContenido"> 
+    <h3>CARRITO DE COMPRAS</h3>
+    <div class="infoCarrito"><p>PRODUCTOS</p> <p>SUBTOTAL</p></div>
+    <div class="carritoInfoCont">
+        <div class="imgCarrito">
+            <div class="carrImagen"><img src="/img/products/trenes.jpg" alt="Imagen de trenes"></div>
+            <div class="carrTren"> 
+                <div>
+                    <p>TREN DE MADERA</p> 
+                    <p>$5.999</p> 
+                </div>
+                <div class="carrColumna">
+                    <div>+</div>
+                    <div>1</div>
+                    <div>-</div>
+                </div> 
+            </div>
+        </div>
+        <div class="carrEliminar">
+            <p> <i class="fas fa-trash"></i></p>
+        </div>
+    </div>
+    <div class="carritoInfoCont">
+        <div class="imgCarrito">
+            <div class="carrImagen"><img src="/img/products/trenes.jpg" alt="Imagen de trenes"></div>
+            <div class="carrTren"> 
+                <div>
+                    <p>TREN DE MADERA</p> 
+                    <p>$5.999</p> 
+                </div>
+                <div class="carrColumna">
+                    <div>+</div>
+                    <div>1</div>
+                    <div>-</div>
+                </div> 
+            </div>
+        </div>
+        <div class="carrEliminar">
+            <p> <i class="fas fa-trash"></i></p>
+        </div>
+    </div>
+    <div class="carritoInfoCont">
+        <div class="imgCarrito">
+            <div class="carrImagen"><img src="/img/products/trenes.jpg" alt="Imagen de trenes"></div>
+            <div class="carrTren"> 
+                <div>
+                    <p>TREN DE MADERA</p> 
+                    <p>$5.999</p> 
+                </div>
+                <div class="carrColumna">
+                    <div>+</div>
+                    <div>1</div>
+                    <div>-</div>
+                </div> 
+            </div>
+        </div>
+        <div class="carrEliminar">
+            <p> <i class="fas fa-trash"></i></p>
+        </div>
+    </div>
+    <div class="carritoSubtotal"> 
+        <p>SUBTOTAL(sin envio):</p>
+        <p>$5.999</p>
+    </div>
+    <div>
+        <div>
+            <p class="infoEnvio">
+                <i class="fas fa-truck"></i>
+                <span>ENVIOS GRATIS</span> 
+                SUPERANDO LOS $9.000           
+            </p>
+        </div>
+        <div>
+            <form action="" class="infoCalcular">
+                <input type="text">
+                <button>CALCULAR</button>
+            </form >
+            <p> NO SE MI CODIGO POSTAL</p>
+        </div>
+        <div class="infoRetiro">
+            <p><i class="fas fa-store"></i>
+                RETIRO EN EL LOCAL</p>
+            <input type="radio"> 
+            <!-- comentario -->    
+        </div>
+    </div>
+    <div class="infoCodigo">
+        <div>
+            <p>Codigo Promocional:</p>
+        </div>
+        <div class="infoPromocion">
+            <div>CYBERGUGU</div>
+            <p>-25%</p>
+        </div>
+    </div>
+    <div class="infoTotal"> <p>TOTAL</p>
+        <div>
+            <div> 5.999 </div>
+            <div class="numero"> -2.000 </div>
+            <div> 3.999</div>
+        </div>
+    </div>
+</section>
+<%- include("../partials/footerBase.ejs")  %> 

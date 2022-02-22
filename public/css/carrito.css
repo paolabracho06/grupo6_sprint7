@@ -1,0 +1,135 @@
+.carrContenido{
+    width: 90%;
+    margin: auto;
+    /*background-color: #F3F0D7;*/
+    padding: 6px;
+}
+.carrContenido>h3{
+    margin: 0;
+    font-size: 2rem;
+    border-bottom: solid 4px #ff7878;
+}
+.infoCarrito{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid 4px #ff7878;
+    font-weight: bold;
+}
+.imgCarrito{
+    display: flex;
+    margin-top: 20px;
+}
+.carrImagen {
+    margin-right: 20px;
+    width: 20%;
+} 
+.carrImagen > img{
+    width: 100%;
+}
+.carrTren{
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+}
+.imagenCarrito{
+    width: 500px;
+}
+.imagenCarrito> img{
+    width: 100%;
+}
+.carrColumna{
+    display: flex;
+}
+.carrColumna > div{
+    background-color: #CEE5D0;
+    padding: 10px;
+    border: solid 1px black
+}
+.carritoInfoCont{
+    display: flex;
+    justify-content: space-between;
+}
+.carrEliminar{
+    margin-right:20px ;
+}
+.carritoSubtotal{
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 1.5rem;
+    border-top:4px solid #ff7878; /* cambia arriba*/
+    border-bottom:4px solid #ff7878;/*cambia abajo*/
+}
+.infoEnvio > span{
+    font-weight: bold;
+    color:#000 ;
+    
+}
+.infoCalcular > button{
+    font-weight: bold;
+    background-color: #CEE5D0;
+    padding: 10px;
+    border: solid 1px black;
+    border-radius: 0 10px 10px 0;  
+}
+.infoCalcular > input{
+    padding: 10px;
+    
+}
+.infoCalcular{
+    display: flex;
+}
+.infoRetiro{
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+    border-bottom:4px solid #ff7878;
+}
+.infoCodigo {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    flex-wrap: wrap;
+}
+.infoPromocion {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-top: 10px;
+    width: 50%;
+}
+.infoPromocion > p{
+    display: inline;
+    margin: 0;
+}
+.infoPromocion > div{
+    background-color: #fff;
+    padding: 10px;
+    border: solid 1px black;
+    margin: 0 5px 5px 0;
+}
+.infoTotal{
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-top: 20px;
+}
+.infoTotal .numero{
+    border-bottom: 1px solid black;
+}
+@media only screen and (min-width: 768px){
+    
+}
+@media only screen and (min-width: 1024px){
+    .contContact{
+        grid-template-rows:auto
+    }
+    .contC1{
+        grid-area: auto;
+        grid-column: span 5;
+    }
+    .contC1 > img{
+        width: 14%;
+    }
+    .contC2 { grid-area: 2 / 1 / 6 / 3; }
+}
