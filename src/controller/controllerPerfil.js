@@ -6,14 +6,10 @@ const { compareSync, hashSync }= require('bcryptjs');
 //llamamos los modelos
 const User = db.User
 const Address = db.Address;
+const Avatar = db.Avatar;
 const controllerPerfil={
     detail:(req,res)=>{
-        // db.User.findAll()
-        //  .then((a)=>{
-        //     res.send(a)
-        //  })
-        //  .catch(e=> console.log(e))
-        User.findByPk(req.params.id)
+        User.findByPk(req.params.id, {include:["avatars"]})
         .then((user)=>{
              console.log(user);
              if(user !== null){
@@ -24,7 +20,7 @@ const controllerPerfil={
          })
     },
     edit: (req,res)=>{
-        let userConsult = User.findByPk(req.params.id);
+        let userConsult = User.findByPk(req.params.id,{include:['avatars']});
         let addressConsult = Address.findOne({where:{user_id:req.params.id}});
         Promise.all([userConsult,addressConsult])
         .then(([user,address])=>{
@@ -45,16 +41,42 @@ const controllerPerfil={
          .then(result => res.redirect(`/perfil/${req.params.id}`))
          .catch(e=>console.log(e))
     },
-    userInfoProcess:(req,res)=>{
-        User.update({
-            first_name: req.body.first_name,
-            last_name: req.body.last_name,
-            email: req.body.email,
-            pass: hashSync(req.body.pass,10)
-        },{
-            where:{id:req.params.id}
-        })
-        .then(r => res.redirect('/perfil/'+req.params.id))
+    userInfoProcess: async (req,res)=>{
+        let userConsult = await User.findByPk(req.params.id).then(response=>response);
+        let avatarOld = userConsult.avatar_id;
+        if(req.file !== undefined){
+            let newAvatar = await Avatar.create({
+                avatar: req.file.filename
+            }).then(response=>response)
+            let userUpdate = await User.update({
+                first_name: req.body.first_name,
+                last_name: req.body.last_name,
+                email: req.body.email,
+                pass: hashSync(req.body.pass,10),
+                avatar_id: newAvatar.id
+            },{where:{id:req.params.id}})
+            .then(response=>{
+                if(avatarOld != 1){
+                    Avatar.destroy({where:{id:avatarOld}}).then(response=>response)
+                }
+            });
+        }else{
+            User.update({
+                first_name: req.body.first_name,
+                last_name: req.body.last_name,
+                email: req.body.email,
+                pass: hashSync(req.body.pass,10),
+                avatar_id: avatarOld
+            },{where:{id:req.params.id}})
+            .then(response =>{
+                 res.redirect('/perfil/'+req.params.id);
+            })
+        }
+        if(userConsult.email !== req.body.email){
+            res.redirect('/logout')
+         }else{
+            res.redirect('/perfil/'+req.params.id)
+         }
     }
 }
 module.exports=controllerPerfil; 

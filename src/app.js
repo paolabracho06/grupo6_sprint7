@@ -32,18 +32,21 @@ app.use(methodOverride('_method'));
 //requerimos rutas main
 const routerPages = require('./routes/pagesRoutes');
 //requerimos router perfil
-const routerPerfil= require('./routes/perfilRoutes')
+const routerPerfil= require('./routes/perfilRoutes');
 //requerimos router admin
-const routerAdmin= require('./routes/adminRoutes')
+const routerAdmin= require('./routes/adminRoutes');
 //ruta de productos
-const routerProducts=require('./routes/productsRoutes')
+const routerProducts=require('./routes/productsRoutes');
 //router category
-const routerCategory = require('./routes/categoryRoutes')
+const routerCategory = require('./routes/categoryRoutes');
+//router size
+const routerSize = require('./routes/sizeRoutes');
 app.use('/',routerPages);
 app.use('/perfil',routerPerfil);
 app.use('/admin',routerAdmin);
 app.use('/products',routerProducts)
 app.use('/category',routerCategory)
+app.use('/size',routerSize)
 
 
 

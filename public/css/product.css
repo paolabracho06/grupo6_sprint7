@@ -2,6 +2,7 @@
     margin-top: 5px;
     display: flex;
     justify-content: space-between;
+    flex-direction: row-reverse;
     padding:10px;
     font-size: 1.3rem;
 }

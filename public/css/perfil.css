@@ -31,6 +31,14 @@
 }
 .contenedor-img_usuario{
     background-color: #fff;
+    border: 1px solid #ccc;
+    width: 200px;
+    line-height: 0;
+    border-radius: 5px;
+}
+.contenedor-img_usuario > img{
+    max-width: 100%;
+    border-radius: 5px;
 }
 .seccion-usuario_perfil > div{
     margin: 15px 10px;
@@ -80,13 +88,18 @@
     text-shadow: 0 0 20px #952;
 }
 .profileEditCont{
-    display: flex;
+    background: #F3F0D7;
     border: 5px solid #FF7878;
+    display: flex;
     border-radius: 5px;
     margin-top: 50px;
 }
 .profileEditCont > img{
     background: #fff;
+    max-width: 200px;
+    height: 200px;
+    background: red;
+    object-fit: cover;
 }
 .formProfileEdit > label{
     display: flex;

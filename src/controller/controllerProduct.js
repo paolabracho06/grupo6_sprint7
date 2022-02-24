@@ -30,13 +30,14 @@ const Image = db.Image;
 
 const controllerProduct={
     productos:(req, res) =>{
-        Product.findAll({
+        consultCategory = Cat.findAll()
+        consultProduct = Product.findAll({
             include: ["images"],
             where: {visibility:1}
         })
-        .then(products =>{
-            console.log(products);
-            res.render('pages/productos.ejs',{db:products})
+        Promise.all([consultProduct,consultCategory])
+        .then(([products,category]) =>{
+            res.render('pages/productos.ejs',{db:products,category})
         })
     },
     create:(req,res)=>{

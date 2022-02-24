@@ -2,10 +2,10 @@
 <%- include("../partials/menuHeader.ejs")  %>
 <div class="contGeneral">
     <div class="profileEditCont">
-        <img src="/img/logo_pequeño.png" alt="foto de perfil">
+        <img src="/img/products/<%= user.avatars.avatar %> " alt="foto de perfil">
         <div>
             <h3>Informacion</h3>
-            <form action="/perfil/<%= user.id %>/edit/info?_method=PUT" method="post" class="formProfileEdit">
+            <form action="/perfil/<%= user.id %>/edit/info?_method=PUT" method="post" class="formProfileEdit" enctype="multipart/form-data">
                 <label for="first_name">
                     Nombre
                     <input placeholder="Colocar nombre" value="<%= user.first_name %>" type="text" name="first_name" id="first_name">

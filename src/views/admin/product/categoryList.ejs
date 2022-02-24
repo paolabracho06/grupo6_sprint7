@@ -7,7 +7,7 @@
                <div>Nombre</div>
                <div>Acciones</div>
                <% for( let i = 0; i < result.length; i++ ) { %>             
-                    <div><%= result[i].name %> </div>
+                    <div><a href="/category/<%= result[i].id %>/list"><%= result[i].name %></a></div>
                     <div class="categoryAction">
                         <a href="/category/<%= result[i].id %>/edit"><i class="fas fa-edit"></i></a> 
                         | 

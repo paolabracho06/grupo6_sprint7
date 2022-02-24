@@ -2,7 +2,11 @@
 <%- include('../partials/menuHeader')  %>
 <%- include('../partials/filterCategory')  %>
         <article class="products-lista-articulos">
-            <% db.forEach(element => { %>
+            <% console.log("response trae "+response) %> 
+            <% if(response == false ){ %>
+                <h2 class="searchNull">No se encontraron resultados</h2>
+            <% } %>  
+            <% db.forEach(element => { %>   
                 <div class="products-lista-articulos-contenedor_producto">
                         <a href="/products/detail/<%= element.id %>">
                         <% for(let i = 0; i<element.images.length;i++){ %>
@@ -25,7 +29,7 @@
                             <div class="contenedor-producto-cuota">
                                 <p>Hasta <%=element.offPorcen%>% de descuento  </p>
                             </div>
-                            <% } else { %><% } %> 
+                            <% } else {} %> 
                             
                         </a>
                         </div>
