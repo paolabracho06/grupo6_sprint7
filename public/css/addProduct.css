@@ -39,6 +39,11 @@
     border-radius: 5px;
     margin: 20px auto;
 }
+.editProductCont > form{
+    flex-direction: row;
+    justify-content: space-between;
+    background: #F3F0D7;
+}
 @media only screen and (min-width: 768px){
     
 }

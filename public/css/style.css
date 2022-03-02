@@ -153,6 +153,15 @@ body{
     margin: 0;
     font-size: 0.9rem;
 }
+.isInvalid{
+    color: red;
+    border: 1px solid red;
+    box-shadow: 0 0 10px red;
+}
+.isValid{
+    border: 1px solid green;
+    box-shadow: 0 0 10px green;
+}
 @media only screen and (min-width: 768px){
     /*header*/
     .searchFormHeader > input{
