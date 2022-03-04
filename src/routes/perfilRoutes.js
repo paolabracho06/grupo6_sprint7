@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const controllerPerfil = require('../controller/controllerPerfil');
 const auth = require("../middleware/authMiddleware");
-const upload = require('../middleware/multerMiddleware');
+const upload = require('../middleware/avatarUpload');
 
 router.get('/:id',auth.logged,controllerPerfil.detail);
 router.get('/:id/edit',auth.logged,auth.user,controllerPerfil.edit);

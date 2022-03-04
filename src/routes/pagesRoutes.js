@@ -15,6 +15,8 @@ router.post('/register', validacion,controllerPages.regProcess);
 router.get('/carrito',auth.logged, controllerPages.carrito);
 router.get('/contacto', controllerPages.contacto);
 router.get('/somos', controllerPages.somos);
+router.get('/install', controllerPages.install);
+router.post('/install', controllerPages.installProcess);
 
 
 

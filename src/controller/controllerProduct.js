@@ -1,24 +1,10 @@
-// const path = require("path")
-// //let db = require("../database/models");
-// //const sequelize = db.sequelize;
-// const {Op} = require("sequelize");
-// const controllerImage = require("./controllerImage") 
-
-//llamamos los modelos
-// const Product = db.Product;
-// const Cat = db.Cat;
-// const Size = db.Size;
-// const Discount = db.Discount;
-
-//eliminar fs,jsonDb y db al finalizar
-//let jsonDb=require('../model/mainJson.js');
-//let db=jsonDb('products');
-
+const path = require("path")
 const fs=require('fs');
 const db = require("../database/models");
 const controllerImage = require("./controllerImage");
 const sequelize = db.sequelize;
 const { Op } = require("sequelize");
+const { dirname } = require("path");
 
 //LLAMAMOS A LOS MODELOS
 const Product = db.Product;
@@ -49,9 +35,9 @@ const controllerProduct={
             res.render('admin/product/addProduct.ejs',{discount,category,size})
         })
     },
-    crearAccion:(req,res)=>{
+    crearAccion: async(req,res)=>{
         let body = req.body;
-        Product.create({
+        let productCreate = await Product.create({
             name: req.body.name,
             price_inv: req.body.price_inv,
             price_who: req.body.price_who,
@@ -64,11 +50,12 @@ const controllerProduct={
             description: req.body.description,
             visibility: req.body.visibility
         })
+        await Image.create({
+            image: req.file.filename,
+            id_products: productCreate.id
+        })
         .then(producto =>{
-            console.log(producto.id);
-            controllerImage.file(producto.id,req.file.filename)
             res.redirect('/products');
-
         })
         .catch(e => console.log("el error es: "+ e));
     },
@@ -84,10 +71,10 @@ const controllerProduct={
              res.render('admin/product/editProduct.ejs',({productoEncontrado:product, size,category,discount,image,selected:"selected"}));
          })
     },
-    update:(req,res)=>{
+    update: async(req,res)=>{
         let id = req.params.id;
-        let imageUpdate;
-        let productUpdate = Product.update({
+        let imageUpdate = await Image.findOne({where:{id_products:id}})
+        let productUpdate = await Product.update({
             name: req.body.name,
             price_inv: req.body.price_inv,
             price_who: req.body.price_who,
@@ -103,20 +90,26 @@ const controllerProduct={
             where: {id: id}
         });
         if(req.file && req.file.filename !== undefined){
-            let imageUpdate = Image.update({
-                image: req.file.filename
-            },{where: {id_products: req.params.id}})
+            if(imageUpdate.image == "default.jpg"){
+                await Image.update({
+                    image: req.file.filename
+                },{where: {id_products: req.params.id}})
+            }else{
+                await Image.update({
+                    image: req.file.filename
+                },{where: {id_products: req.params.id}})
+                fs.unlinkSync(path.resolve(__dirname,`../../public/img/products/${imageUpdate.image}`))                
+            }
         }
-        Promise.all([productUpdate,imageUpdate])
-        .then(([product,image])=>{
-            res.redirect(`/products/detail/${req.params.id}`);
-        })
+        res.redirect(`/products/detail/${req.params.id}`)
     },
     productDelete:(req,res)=>{
+        let imgArchive = Image.findOne({where:{id_products:req.params.id}})
         let productDelete = Product.destroy({where:{ id: req.params.id}});
         let imageDelete = Image.destroy({where:{ id_products: req.params.id}});
-        Promise.all([productDelete,imageDelete])
-        .then(([product,image])=>{
+        Promise.all([imgArchive,productDelete,imageDelete])
+        .then(([archive,product,image])=>{
+            fs.unlinkSync(path.resolve(__dirname,`../../public/img/products/${archive.image}`))
             res.redirect('/products')
         })
     },

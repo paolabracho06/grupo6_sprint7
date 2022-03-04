@@ -9,8 +9,7 @@ const upload = require('../middleware/multerMiddleware');
 router.get('/', controllerProduct.productos);
 
 //vista del formulario crear
-//router.get('/create',controllerAuth.admin, controllerProduct.create);
-router.get('/create', controllerProduct.create);
+router.get('/create',controllerAuth.admin, controllerProduct.create);
 //accion del formulario crear
 router.post('/', upload.single('img'), controllerProduct.crearAccion);
 //editar form

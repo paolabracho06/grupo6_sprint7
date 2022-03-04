@@ -1,4 +1,5 @@
-const path = require("path")
+const path = require("path");
+const fs = require("fs")
 let db = require("../database/models");
 const sequelize = db.sequelize;
 const {Op} = require("sequelize");
@@ -44,6 +45,7 @@ const controllerPerfil={
     userInfoProcess: async (req,res)=>{
         let userConsult = await User.findByPk(req.params.id).then(response=>response);
         let avatarOld = userConsult.avatar_id;
+        let avatarConsult = await Avatar.findByPk(avatarOld).then(response=>response);
         if(req.file !== undefined){
             let newAvatar = await Avatar.create({
                 avatar: req.file.filename
@@ -58,6 +60,7 @@ const controllerPerfil={
             .then(response=>{
                 if(avatarOld != 1){
                     Avatar.destroy({where:{id:avatarOld}}).then(response=>response)
+                    fs.unlinkSync(path.resolve(__dirname,`../../public/img/avatars/${avatarConsult.avatar}`))
                 }
             });
         }else{

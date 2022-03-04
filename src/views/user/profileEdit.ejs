@@ -2,7 +2,7 @@
 <%- include("../partials/menuHeader.ejs")  %>
 <div class="contGeneral">
     <div class="profileEditCont">
-        <img src="/img/products/<%= user.avatars.avatar %> " alt="foto de perfil">
+        <img src="/img/avatars/<%= user.avatars.avatar %> " alt="foto de perfil">
         <div>
             <h3>Informacion</h3>
             <form action="/perfil/<%= user.id %>/edit/info?_method=PUT" method="post" class="formProfileEdit" enctype="multipart/form-data">
