@@ -33,10 +33,17 @@
                         <p class="errForm"><%= locals.errors.email.msg %></p>
                     <% } %>
                     <input type="password" placeholder="Contraseña" name="pass" id="contrasenia" require/>
+                    <div class="div-error" id="errors-pass">
+                        <p>caracteres entre 4 y 15, una letra mayúscula</p>
+                        <p>una minúscula, un digito, sin espacios en blanco y un caracter especial</p>
+                    </div>
                     <% if (locals.errors && locals.errors.pass) { %>
                         <p class="errForm"><%= locals.errors.pass.msg %></p>
                     <% } %>
                     <input type="password" placeholder="Confirmar contraseña" name="pass1" id="contrasenia1"require/>
+                    <div class="div-error" id="errors-pass1">
+                        <p>Las contraseñas no son iguales</p>
+                    </div>
                     <% if (locals.errors && locals.errors.pass) { %>
                         <p class="errForm"><%= locals.errors.pass.msg %></p>
                     <% } %>
