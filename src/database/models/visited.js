@@ -10,19 +10,15 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Visited.belongsToMany(models.Product,{
+      Visited.belongsTo(models.Product,{
         as: 'products',
         through: "visiteds",
-        foreignKey: "user_id",
-        otherKey: "product_id",
-        timestamps: false
+        foreignKey: "product_id",
       });
-      Visited.belongsToMany(models.User,{
+      Visited.belongsTo(models.User,{
         as: 'users',
         through: 'visiteds',
-        foreignKey: 'product_id',
-        otherKey: 'user_id',
-        timestamps: false
+        foreignKey: 'user_id',
       });
     }
   }

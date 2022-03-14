@@ -14,6 +14,8 @@ status *
 orders *
 shipping *
 orderDetail*
+promocode*
+usePromoCode*
 ---------------------------------------------
 sequelize model:generate --name Cat --attributes name:string
 
@@ -44,3 +46,7 @@ sequelize model:generate --name Order --attributes date:date,total:integer,payme
 sequelize model:generate --name Shipping --attributes street:string,number:integer,price:integer,order_id:integer,payment_id:integer,city:string,province:string,floor:string,cp:integer,phone:integer
 
 sequelize model:generate --name OrderDetail --attributes quantity:integer,subtotal:integer,order_id:integer,product_id:integer,user_add_id:integer
+
+sequelize model:generate --name PromoCode --attributes code:string,active:integer,discount:integer
+
+sequelize model:generate --name UsePromoCode --attributes id_code:integer,id_user:integer,used:integer

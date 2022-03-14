@@ -1,4 +1,4 @@
-module.exports = (req,res,next) => {
+module.exports = async (req,res,next) => {
     let logged = null;
     let access = null;
     let cat = null;
@@ -10,13 +10,13 @@ module.exports = (req,res,next) => {
         cat = req.session.cat
     }else{
     if(req.session.user == undefined && req.cookies.userEmail != undefined){
-        User.findOne({where:{email:req.cookies.userEmail}})
-        .then(user=> {
-            req.session.user = user.dataValues;
-            req.session.access = user.dataValues.rol_id;
-            logged = req.session.user
-            access = req.session.access
-        })
+        let user = await User.findOne({where:{email:req.cookies.userEmail}})
+        req.session.user = user.dataValues;
+        req.session.access = user.dataValues.rol_id;
+        logged = req.session.user
+        access = req.session.access
+        let address = await db.Address.findOne({where:{user_id:req.session.user.id}})
+        req.session.address = address.dataValues
     }
 }
     res.locals.user = logged

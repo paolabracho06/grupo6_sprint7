@@ -10,6 +10,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "user_id",
         as:"users"
       })
+      Address.hasOne(models.OrderDetail,{
+        foreignKey: "user_add_id",
+        as: "orderdetails"
+      })
     }
   }
   Address.init({

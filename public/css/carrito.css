@@ -1,8 +1,10 @@
 .carrContenido{
     width: 90%;
-    margin: auto;
-    /*background-color: #F3F0D7;*/
+    margin: 20px auto;
+    background-color: #F3F0D7;
     padding: 6px;
+    border: 1px solid #000;
+    border-radius: 5px;
 }
 .carrContenido>h3{
     margin: 0;
@@ -14,6 +16,7 @@
     justify-content: space-between;
     border-bottom: solid 4px #ff7878;
     font-weight: bold;
+    padding: 10px;
 }
 .imgCarrito{
     display: flex;
@@ -48,9 +51,22 @@
 .carritoInfoCont{
     display: flex;
     justify-content: space-between;
+    border-bottom: 1px solid #ff7878;
+    padding-bottom: 5px;
 }
 .carrEliminar{
-    margin-right:20px ;
+    margin-right:20px;
+    display: flex;
+    align-items: center;
+}
+.carrEliminar > form > button{
+    background: #ff7878;
+    border: none;
+    padding: 5px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
 }
 .carritoSubtotal{
     display: flex;
@@ -59,6 +75,10 @@
     font-size: 1.5rem;
     border-top:4px solid #ff7878; /* cambia arriba*/
     border-bottom:4px solid #ff7878;/*cambia abajo*/
+    padding: 10px;
+}
+.infoEnvio{
+    padding: 10px;
 }
 .infoEnvio > span{
     font-weight: bold;
@@ -73,8 +93,7 @@
     border-radius: 0 10px 10px 0;  
 }
 .infoCalcular > input{
-    padding: 10px;
-    
+    padding: 10px; 
 }
 .infoCalcular{
     display: flex;
@@ -83,26 +102,35 @@
     display: flex;
     font-weight: bold;
     align-items: center;
-    border-bottom:4px solid #ff7878;
+    padding: 10px;
 }
 .infoCodigo {
     display: flex;
     justify-content: space-between;
     font-weight: bold;
     flex-wrap: wrap;
+    padding-top: 10px;
 }
 .infoPromocion {
     display: flex;
     justify-content: end;
     align-items: center;
     margin-top: 10px;
-    width: 50%;
+    flex-direction: column;
+    
 }
 .infoPromocion > p{
     display: inline;
     margin: 0;
 }
 .infoPromocion > div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.infoPromocion > div > span{
     background-color: #fff;
     padding: 10px;
     border: solid 1px black;
@@ -111,11 +139,78 @@
 .infoTotal{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-weight: bold;
     margin-top: 20px;
+    border-top: 3px solid #ff7878;
+    padding-top: 10px;
 }
-.infoTotal .numero{
-    border-bottom: 1px solid black;
+.infoTotal {
+    border-bottom: 1px solid #000;
+}
+.cuentaCarrito{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.cuentaCarritoTotal{
+    border-top: 1px solid #000;
+    width: 100%;
+    text-align: center;
+}
+.carritoEnvio{
+    padding: 10px;
+    border-bottom:4px solid #ff7878;
+}
+.carritoEnvio:nth-child(2){
+    padding: 10px;
+    background-color: red;
+}
+.msgCarrito{
+    text-align: center;
+    padding: 20px;
+    margin: auto;
+    color: #ff7878;
+    text-shadow: 0 1px 0 #000;
+}
+.validarCodigo{
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+.validarCodigo > input{
+    border-left: 1px solid #000;
+    border-right: 0px solid #000;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    padding: 5px;
+    outline: none;
+    border-radius: 5px 0 0 5px;
+}
+.validarCodigo > input[type="submit"]{
+    background: #ff7878;
+    color: #000;
+    font-weight: bold;
+    border-right: 1px solid #000;
+    border-left: none;
+    border-radius: 0 5px 5px 0;
+}
+.validarCodigo > div{
+    padding: 5px;
+}
+.deleteCode{
+    background: #ff7878;
+    border: none;
+    padding: 5px;
+    margin: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
 @media only screen and (min-width: 768px){
     
@@ -132,4 +227,7 @@
         width: 14%;
     }
     .contC2 { grid-area: 2 / 1 / 6 / 3; }
+    .cuentaCarrito{
+        font-size: 1.5rem;
+    }
 }

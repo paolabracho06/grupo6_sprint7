@@ -2,20 +2,35 @@ const fs=require('fs');
 let db= require("../database/models");
 const { compareSync, hashSync }= require('bcryptjs');
 const {validatioResult, validationResult}=require('express-validator');
+const { Op, where } = require("sequelize");
 
 const User = db.User;
 const Address = db.Address;
+const Product = db.Product;
+const Visited = db.Visited;
+const Image = db.Image
 
 const controllerPages = {
-    'home': (req, res) => {
-        res.render('pages/home.ejs')
+    'home': async(req, res) => {
+        let popularConsult = await Visited.findAll({
+            limit: 3,
+            where:{
+                visited: {[Op.gte]:3}
+            },
+            include:[{
+                association: 'products',
+                include:['images','discounts']
+            }],
+            order:[['visited','DESC']]
+        })
+        res.render('pages/home.ejs',{popularConsult})
     },
     'login': (req, res) => {
         res.render('pages/login.ejs')
     },
-    'loginProcess': (req, res) => {
-        User.findOne({where:{email:req.body.email}})
-         .then(user=> {
+    'loginProcess': async(req, res) => {
+        let user = await User.findOne({where:{email:req.body.email}})
+        let address = await Address.findOne({where:{user_id:user.dataValues.id}})
             if(user !== null){
                 let confirm = compareSync(req.body.pass,user.dataValues.pass);
                 if(!confirm){
@@ -23,6 +38,7 @@ const controllerPages = {
                 }
                 req.session.user = user.dataValues;
                 req.session.access = user.dataValues.rol_id;
+                req.session.address = address.dataValues;
                 if(req.body.recordarUsuario !== undefined){
                     res.cookie('userEmail', req.body.email, { maxAge: (1000 * 60) * 60 })
                 }
@@ -30,16 +46,11 @@ const controllerPages = {
             }else{
                 res.render('pages/login.ejs',{email: !user ? "El email ingresado no es correcto" : null})
             }
-         })
-         .catch(e => console.log(`Este error es: ${e}`))
     },
     'logout': (req,res)=>{
         delete req.session.user;
-        res.cookie('userEmail', req.body.email, { maxAge: -1 })
+        res.cookie('userEmail', req.body.email, {maxAge: -1})
         res.redirect("/")
-    },
-    'carrito':(req,res) =>{
-        res.render('pages/carrito.ejs')
     },
     'register':(req,res) =>{
         res.render('pages/register.ejs')
@@ -106,6 +117,7 @@ const controllerPages = {
             }
             res.render("admin/install.ejs",{verification})
         })
+        .catch(e=>console.log(e))
     },
     'installProcess':async(req,res)=>{
         //Creando registro de roles
@@ -354,12 +366,26 @@ const controllerPages = {
             description: "Una descripción corta",
             visibility: 1
         }])
-        for(let i=1; i<=15;i++){
+        for(let i=1; i<=12;i++){
             await db.Image.create({
                 image: "default.jpg",
                 id_products: i
             })
-        }   
+        } 
+        await db.Payment.bulkCreate([
+            {name: "Efectivo"},
+            {name: "Tarjeta"},
+            {name: "Cheque"}
+        ]) 
+        await db.Status.bulkCreate([
+            {status: "Pago"},
+            {status: "Procesando"},
+            {status: "Inpago"}
+        ])
+        await db.PromoCode.bulkCreate([
+            {code: "CYBERGUGU", active: 1, discount: 10},
+            {code: "DH", active: 1, discount: 100},
+        ])
         res.redirect('/install')
     }
 }

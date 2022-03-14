@@ -225,6 +225,7 @@ relacionados*/
     border: 1px solid #000;
     border-radius: 5px;
     font-weight: bold;
+    cursor: pointer;
 }
 .infoDetail{
     text-align: center;
@@ -284,6 +285,15 @@ relacionados*/
     border: 1px solid #000;
     padding: 7px;
     border-radius: 5px;
+}
+.recommendedButton{
+    background: #FF7878;
+    border: none;
+    margin-top: 20px;
+    padding: 15px 10px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
 }
 @media only screen and (min-width: 768px){
     .imgDetail{

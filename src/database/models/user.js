@@ -28,6 +28,10 @@ module.exports = (sequelize, DataTypes) => {
         otherKey: "product_id",
         timestamps: false
       })
+      User.hasOne(models.UsePromoCode,{
+        foreignKey: 'id_user',
+        as: "userpromocodes"
+      });
     }
   }
   User.init({

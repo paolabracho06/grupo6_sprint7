@@ -12,9 +12,10 @@ router.get('/logout',auth.logged, controllerPages.logout);
 router.get('/register',auth.visited, controllerPages.register);
 router.post('/register', validacion,controllerPages.regProcess);
 
-router.get('/carrito',auth.logged, controllerPages.carrito);
 router.get('/contacto', controllerPages.contacto);
 router.get('/somos', controllerPages.somos);
+
+//Rutas de instalador
 router.get('/install', controllerPages.install);
 router.post('/install', controllerPages.installProcess);
 

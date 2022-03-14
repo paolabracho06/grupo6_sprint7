@@ -70,27 +70,37 @@
                 </div>
                 <h3>MÁS POPULARES</h3>
                 <div class="contenedor-imgHome">
+                    <% if(popularConsult.length == 0){ %> 
+                        <h3 class="searchNull">No hay datos suficientes para esto</h3>
+                    <% } %> 
+                   <% for( let i = 0; i < popularConsult.length; i++ ) { %>
                     <div>
                         <div class="catImgHome">
-                            <img src="img/icons/img/toys1.jpg" alt="boligrafo Multicolor" class="imagenes-edades">
+                            <img src="img/products/<%= popularConsult[i].products.images[0].image %>" alt="boligrafo Multicolor" class="imagenes-edades">
                         </div>
-                        <h4>BOLIGRAFO MULTICOLOR</h4>
-                        <p>$1300 | 20% OFF</p>
-                    </div>
-                    <div>
-                        <div class="catImgHome">
-                            <img src="img/icons/img/michal-bozek-RcxR1aLw8X0-unsplash.jpg" alt="cubo de madera" class="imagenes-edades">
-                        </div>
-                        <h4>CUBO DE MADERA</h4>
-                        <p>$3900 | 10% OFF</p>
-                    </div>
-                    <div>
-                        <div class="catImgHome">
-                            <img src="img/icons/img/trenes.jpg" alt="tren de madera" class="imagenes-edades">
-                        </div>
-                        <h4>TREN DE MADERA</h4>
-                        <p>$3299 | 45% OFF</p>
+                        <h4><%= popularConsult[i].products.name %> </h4>
+                        <% let claseTachado="tachadoPrice";  if(access == 3 || !access){ %> 
+                            <p class="<%= popularConsult[i].products.discounts.discount > 0 ? claseTachado : null %>">$<%= popularConsult[i].products.price_inv %></p>
+                        <% } %> 
+                        <% if(access == 3 && popularConsult[i].products.discounts.discount > 0 || !access && popularConsult[i].products.discounts.discount > 0){ %> 
+                            <div class="contenedor-producto-cuota">
+                                <p>$<%= popularConsult[i].products.price_inv - (popularConsult[i].products.price_inv*popularConsult[i].products.discounts.discount/100) %> | -<%= popularConsult[i].products.discounts.discount %>%</p>
+                            </div>
+                        <% } %> 
+                        <% if(access == 2){ %> 
+                            <p class="">$<%= popularConsult[i].products.price_inv %></p>
+                        <% } %> 
+                        <% if(access == 2 && popularConsult[i].products.discounts.discount > 0){ %> 
+                            <div class="contenedor-producto-cuota">
+                                <p>$<%= popularConsult[i].products.price_who - (popularConsult[i].products.price_who*popularConsult[i].products.discounts.discount/100) %> | -<%= popularConsult[i].products.discounts.discount %>%</p>
+                            </div>
+                        <% } %> 
+                        <% if(access == 1){ %> 
+                            <p class="">Individual $<%= popularConsult[i].products.price_inv %></p>
+                            <p class="">Mayorista $<%= popularConsult[i].products.price_who %></p>
+                        <% } %> 
                     </div> 
+                    <% } %> 
                 </div>               
         </article>
         <!-- <article class="contenidos"></article> -->

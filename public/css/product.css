@@ -83,6 +83,9 @@
 .products-lista-articulos-contenedor_producto>div{
     margin:2px 0;
 }
+.tachadoPrice{
+    text-decoration: line-through;
+}
 /* ocultos para phone */
 .filter-products-desktop{
     display: none;

@@ -18,10 +18,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "payment_id",
         as:"payments"
       })
-      Shipping.hasOne(models.OrderDetail,{
-        foreignKey: "user_add_id",
-        as: "shippings"
-      })
     }
   }
   Shipping.init({

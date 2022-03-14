@@ -9,11 +9,14 @@
         <div class="divLogin">
             <div class="divLogin2">
                 <form class="formLogin" action="/login" method="post">
-                    <input type="email" value="<%= locals.oldEmail ? locals.oldEmail : null %>" placeholder="Email o usuario" name="email" id="email" required/>
+                    <input type="email" value="<%= locals.oldEmail ? locals.oldEmail : null %>" placeholder="Email o usuario" name="email" id="email" class="emailLogin" required/>
                     <% if(locals.email){ %>
                         <p class="errForm"> <%= locals.email %></p>  
                      <% } %> 
-                    <input type="password" placeholder="Contraseña" name="pass" id="password" required/>
+                     <div class="divErrVacio errForm"></div>
+                     <div class="divErrEmail errForm"></div>
+                     <input type="password" placeholder="Contraseña" name="pass" id="password" class="passLogin" required/>
+                     <div class="divErrVacioPass errForm"></div>
                     <% if(locals.password){ %>
                         <p class="errForm"><%= locals.password %></p>  
                     <% } %> 
@@ -29,5 +32,6 @@
             </div> 
         </div>
     </section>
+    <script src="/js/validation/loginValidation.js"></script>
     <!-- FOOTER -->
 <%- include("../partials/footerBase.ejs")  %>

@@ -41,12 +41,15 @@ const routerProducts=require('./routes/productsRoutes');
 const routerCategory = require('./routes/categoryRoutes');
 //router size
 const routerSize = require('./routes/sizeRoutes');
+//router cart
+const routerCart = require('./routes/cartRoutes')
 app.use('/',routerPages);
 app.use('/perfil',routerPerfil);
 app.use('/admin',routerAdmin);
 app.use('/products',routerProducts)
 app.use('/category',routerCategory)
 app.use('/size',routerSize)
+app.use('/carrito',routerCart)
 
 
 

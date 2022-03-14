@@ -20,6 +20,11 @@ router.put('/:id/edit',controllerAuth.admin, upload.single('img'), controllerPro
 router.get('/detail/:id', controllerProduct.productDetail);
 //accion eliminar
 router.delete('/:id/delete',controllerAuth.admin, controllerProduct.productDelete);
+//recomendar
+router.post('/:id/recommended', controllerAuth.logged, controllerProduct.recommended);
+//quitar recomendación
+router.delete('/:id/recommendedDelete', controllerAuth.logged, controllerProduct.recommendedDelete);
+
 //search
 router.get('/search',controllerProduct.search)
 module.exports=router;

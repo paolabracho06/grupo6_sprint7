@@ -3,8 +3,8 @@ const fs=require('fs');
 const db = require("../database/models");
 const controllerImage = require("./controllerImage");
 const sequelize = db.sequelize;
-const { Op } = require("sequelize");
-const { dirname } = require("path");
+const { Op, where } = require("sequelize");
+
 
 //LLAMAMOS A LOS MODELOS
 const Product = db.Product;
@@ -12,13 +12,14 @@ const Cat = db.Cat;
 const Size = db.Size;
 const Discount = db.Discount;
 const Image = db.Image;
+const Visited = db.Visited;
 
 
 const controllerProduct={
     productos:(req, res) =>{
-        consultCategory = Cat.findAll()
-        consultProduct = Product.findAll({
-            include: ["images"],
+        let consultCategory = Cat.findAll()
+        let consultProduct = Product.findAll({
+            include: ["images","discounts"],
             where: {visibility:1}
         })
         Promise.all([consultProduct,consultCategory])
@@ -113,13 +114,61 @@ const controllerProduct={
             res.redirect('/products')
         })
     },
-    productDetail:(req, res) =>{
-        Product.findByPk(req.params.id,{
+    productDetail: async(req, res) =>{
+        let visitedConsult;
+        if(req.session.user){
+            visitedConsult = await Visited.findOne({
+                where:{
+                    product_id: req.params.id,
+                    user_id: req.session.user.id
+                }
+            });
+        }else{
+            visitedConsult = "visited"
+        }
+
+        let productConsult = await Product.findByPk(req.params.id,{
             include: ["images","sizes","cats"]
-        })
-         .then(product =>{
-             res.render('pages/productDetail.ejs',{articulo:product})
-         })
+        });
+        res.render('pages/productDetail.ejs',{articulo:productConsult,visitedConsult})
+    },
+    recommended: async(req,res)=>{
+        let visited=1;
+        let visitasProducto
+        let id = req.params.id
+        let idUser = req.session.user.id
+        let visitedConsult = await Visited.findOne({where:{
+            product_id: id
+        }})
+        if(visitedConsult === null || visitedConsult.user_id !== idUser){
+            if(visitedConsult !== null){
+                visitasProducto = await Visited.findAll({where:{
+                    product_id: id
+                }});
+                visited += visitasProducto.pop().visited
+            }else{
+                visited = 1;
+            }
+            await Visited.create({
+                visited: visited,
+                product_id: id,
+                user_id: idUser
+            })
+            console.log("entro aunque haya registros");
+        }else{
+            //hay registros y no se puede crear la recomendacion
+            console.log("no creo el registro");
+        }
+        res.redirect('/products/detail/'+id)
+    },
+    recommendedDelete: (req,res)=>{
+        let id = req.params.id
+        let idUser = req.session.user.id
+        Visited.destroy({where:{
+            product_id: id,
+            user_id: idUser
+        }})
+        .then(resolve=> res.redirect('/products/detail/'+id))
     },
     search:(req,res)=>{
         let search = req.query.search;
