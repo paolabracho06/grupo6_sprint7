@@ -5,14 +5,15 @@
     margin-bottom: 100px;
 }
 .somosLogo{
-    width: 50%;
+    width: 100%;
     margin: 0 auto;
 }
 .somosLogo > img{
     width: 100%;
+    padding-top: 50px;
 }
 @media only screen and (min-width: 768px){
-    .somosLogo{ width: 30%;}
+    .somosLogo{ width: 80%;}
 }
 @media only screen and (min-width: 1024px){
 }
