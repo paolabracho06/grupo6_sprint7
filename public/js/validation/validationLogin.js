@@ -29,15 +29,16 @@ emailLogin.addEventListener("blur",()=>{
         emailLogin.classList.add("isInvalid");
         emailLogin.classList.remove("isValid");
         if(!erroresLogin.includes(errEmailValid)){
-            erroresLogin.push(errEmailValid);
-            divErrEmail.innerHTML=errEmailValid+"<br>"
+            erroresLogin.push(erroEmailValid);
+            divErroEmail.innerHTML=erroEmailValid+"<br>"
         }
     }else{
         emailLogin.classList.add("isValid");
         emailLogin.classList.remove("isInvalid");
-        let pos = erroresLogin.indexOf(errEmailValid);
+        let pos = erroresLogin.indexOf(erroEmailValid);
         erroresLogin.splice(pos,1);
-        divErrEmail.innerHTML=""
+        divErro
+        mail.innerHTML=""
     }
     
 });
