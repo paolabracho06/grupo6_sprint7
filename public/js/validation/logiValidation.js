@@ -10,7 +10,7 @@ emailLogin.focus()
 
 emailLogin.addEventListener("blur",()=>{
     let errVacio = "El email no puede estar vacío";
-    let errEmailValid = "El email tiene que ser válido";
+    let errEmailValid = "El email no es válido";
     if(emailLogin.value == ""){
         emailLogin.classList.add("isInvalid");
         emailLogin.classList.remove("isValid");
@@ -65,6 +65,6 @@ formLogin.addEventListener("submit",(e)=>{
         e.preventDefault();
         console.log("No se envia");
     }else{
-        console.log("se envio");
+        console.log("Se envio");
     }
 })
