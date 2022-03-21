@@ -137,16 +137,6 @@ const controllerPages = {
             avatar_id:1,
             rol_id:1,
         });
-        let addressAdmin = await Address.create({
-            province: "",
-            city: "",
-            street:"",
-            number:"",
-            cp:"",         
-            phone:"",
-            floor:"",
-            user_id: userAdmin.id,
-        });
         let userMayorista = await User.create({
             first_name:"Mayorista",
             last_name:"DH",
@@ -154,16 +144,6 @@ const controllerPages = {
             pass:"$2a$10$0Xhs.ir9MpmkZoYYj92rs.oWRi2crKnqJDKvMdzIYYWxi.KMB74mK",
             avatar_id:1,
             rol_id:2,
-        });
-        let addressMayorista = await Address.create({
-            province: "",
-            city: "",
-            street:"",
-            number:"",
-            cp:"",         
-            phone:"",
-            floor:"",
-            user_id: userMayorista.id,
         });
         let userMinorista = await User.create({
             first_name:"Minorista",
@@ -173,42 +153,70 @@ const controllerPages = {
             avatar_id:1,
             rol_id:3,
         });
-        let addressMinorista = await Address.create({
-            province: "",
-            city: "",
-            street:"",
-            number:"",
-            cp:"",         
-            phone:"",
-            floor:"",
-            user_id: userMinorista.id,
-        });
+        let address = await Address.bulkCreate([
+            {
+                province: null,
+                city: null,
+                street:null,
+                number:null,
+                cp:null,         
+                phone:null,
+                floor:null,
+                user_id: 1,
+            },
+            {
+                province: null,
+                city: null,
+                street:null,
+                number:null,
+                cp:null,         
+                phone:null,
+                floor:null,
+                user_id: 2,
+            },
+            {
+                province: null,
+                city: null,
+                street:null,
+                number:null,
+                cp:null,         
+                phone:null,
+                floor:null,
+                user_id: 3,
+            }
+        ])
         //creacion de categorias
-        await db.Cat.create({
-            name: "De 0 a 24 meses"
-        })
-        await db.Cat.create({
-            name: "De 2 a 3 años"
-        })
-        await db.Cat.create({
-            name: "De 4 a 6 años"
-        })
+        await db.Cat.bulkCreate([
+            {
+                name: "De 0 a 24 meses"
+            },
+            {
+                name: "De 2 a 3 años"
+            },
+            {
+                name: "De 4 a 6 años"
+            }
+        ])
         //Creacion de tamaños
-        await db.Size.create({
-            size: "Pequeño"
-        })
-        await db.Size.create({
-            size: "Mediano"
-        })
-        await db.Size.create({
-            size: "Grande"
-        })
+        await db.Size.bulkCreate([
+            {
+                size: "Pequeño"
+            },
+            {
+                size: "Mediano"
+            },
+            {
+                size: "Grande"
+            }
+        ])
         //descuentos
-        await db.Discount.create({discount: "0"})
-        await db.Discount.create({discount: "5"})
-        await db.Discount.create({discount: "10"})
-        await db.Discount.create({discount: "15"})
-        await db.Discount.create({discount: "20"})
+        await db.Discount.bulkCreate([
+            {discount: "0"},
+            {discount: "5"},
+            {discount: "10"},
+            {discount: "15"},
+            {discount: "20"}
+        ])
         //Productos
         let bulkPr = db.Product.bulkCreate([{
             name: "Producto 1",
