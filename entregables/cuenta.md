@@ -17,5 +17,5 @@ pass: 11111
 cuenta comprador
 ---------------
 
-email: individual@dh.com
+email: minorista@dh.com
 pass: 11111
