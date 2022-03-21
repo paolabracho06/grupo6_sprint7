@@ -3,7 +3,7 @@ const fs=require('fs');
 const db = require("../database/models");
 const controllerImage = require("./controllerImage");
 const sequelize = db.sequelize;
-const { Op, where } = require("sequelize");
+const { Op } = require("sequelize");
 
 
 //LLAMAMOS A LOS MODELOS
@@ -37,6 +37,7 @@ const controllerProduct={
             res.render('admin/product/addProduct.ejs',{discount,category,size})
         })
     },
+
     crearAccion: async(req,res)=>{
         let body = req.body;
         let productCreate = await Product.create({
@@ -56,10 +57,7 @@ const controllerProduct={
             image: req.file.filename,
             id_products: productCreate.id
         })
-        .then(producto =>{
-            res.redirect('/products');
-        })
-        .catch(e => console.log("el error es: "+ e));
+        res.redirect('/products');
     },
     edit:(req,res)=>{
         let productConsult = Product.findByPk(req.params.id);
@@ -100,18 +98,20 @@ const controllerProduct={
                 await Image.update({
                     image: req.file.filename
                 },{where: {id_products: req.params.id}})
-                fs.unlinkSync(path.resolve(__dirname,`../../public/img/products/${imageUpdate.image}`))                
+                //solo funciona en local
+                //fs.unlinkSync(path.resolve(__dirname,`../../public/img/products/${imageUpdate.image}`))                
             }
         }
         res.redirect(`/products/detail/${req.params.id}`)
     },
     productDelete:(req,res)=>{
         let imgArchive = Image.findOne({where:{id_products:req.params.id}})
-        let productDelete = Product.destroy({where:{ id: req.params.id}});
         let imageDelete = Image.destroy({where:{ id_products: req.params.id}});
+        let productDelete = Product.destroy({where:{ id: req.params.id}});
         Promise.all([imgArchive,productDelete,imageDelete])
         .then(([archive,product,image])=>{
-            fs.unlinkSync(path.resolve(__dirname,`../../public/img/products/${archive.image}`))
+            //borrado de archivo, solo funciona en local
+            // fs.unlinkSync(path.resolve(__dirname,`../../public/img/products/${archive.image}`))
             res.redirect('/products')
         })
     },

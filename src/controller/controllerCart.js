@@ -20,11 +20,6 @@ const controllerCart = {
             });
         let codeUse;
         promoCodes.length > 0 ? codeUse = 1 : codeUse=0
-        //pruebas con la imagen
-        // let imagesConsult;
-        // for(let i=0; i<orderConsult.length;i++){
-        //      imagesConsult = await db.Image.findAll({where:{id_products:orderConsult[i].products.id}})
-        //     }
         res.render('pages/carrito.ejs',{orderConsult,codeUse,promoCodes})
     },
     carritoAdd: async(req,res)=>{
@@ -35,11 +30,6 @@ const controllerCart = {
             res.redirect('/carrito')
         }else{
             let user= req.session.user;
-            let date = new Date();
-            const format = (date)=>{
-                let formatted_date = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear()
-                return formatted_date;
-            }
             let productConsult = await Product.findOne({where:{id}});
             let addressConsult = await Address.findOne({where:{user_id:user.id}});
             let total
@@ -49,7 +39,7 @@ const controllerCart = {
                 total = productConsult.price_who;
             }
             let orderNew = await db.Order.create({
-                date:format(date),
+                date:null,
                 total:total,
                 payments_id:1,
                 user_id:user.id,
