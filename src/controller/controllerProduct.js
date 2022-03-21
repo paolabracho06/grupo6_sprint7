@@ -19,6 +19,7 @@ const controllerProduct={
     productos:(req, res) =>{
         let consultCategory = Cat.findAll()
         let consultProduct = Product.findAll({
+            order: [['createdAt','DESC']],
             include: ["images","discounts"],
             where: {visibility:1}
         })
@@ -126,11 +127,12 @@ const controllerProduct={
         }else{
             visitedConsult = "visited"
         }
-
+        
+        let orderConsult= await db.OrderDetail.findOne({where:{user_add_id:req.session.user.id,product_id:req.params.id}})
         let productConsult = await Product.findByPk(req.params.id,{
             include: ["images","sizes","cats"]
         });
-        res.render('pages/productDetail.ejs',{articulo:productConsult,visitedConsult})
+        res.render('pages/productDetail.ejs',{articulo:productConsult,visitedConsult,orderConsult})
     },
     recommended: async(req,res)=>{
         let visited=1;
@@ -172,18 +174,21 @@ const controllerProduct={
     },
     search:(req,res)=>{
         let search = req.query.search;
-        Product.findAll({
-            where:{
+        let consultCategory = Cat.findAll()
+        let consultProduct = Product.findAll({
+            order: [['createdAt','DESC']],
+            include: ["images","discounts"],
+            where: {
                 name: { [Op.like]: `%${search}%` },
                 visibility: 1
-            },
-            include:["images"]
+            }
         })
-        .then(result =>{
-            if(result.length !== 0){
-                res.render("pages/search.ejs",{db:result,response: true})
+        Promise.all([consultProduct,consultCategory])
+        .then(([products,category]) =>{
+            if(products.length !== 0){
+                res.render('pages/search.ejs',{db:products,category,response: true});
             }else{
-                res.render("pages/search.ejs",{db:result,response:false})
+                res.render("pages/search.ejs",{db:products,category,response: false})
             }
         })
     }   

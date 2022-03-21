@@ -15,7 +15,8 @@
             <div class="carrTren"> 
                 <div>
                     <p><%= orderConsult[i].products.name  %></p> 
-                    <p>$<%= precio %></p> 
+                    <p class="<%= orderConsult[i].products.discounts.discount > 0 ? "tachadoPrice" : null %>">$<%= precio %></p>
+                    <p class="contenedor-producto-cuota">$<%= precio - (precio*orderConsult[i].products.discounts.discount/100) %> -<%= orderConsult[i].products.discounts.discount %>%</p>
                 </div>
                 <div class="carrColumna">
                     <div>+</div>

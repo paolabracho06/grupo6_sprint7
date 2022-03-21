@@ -17,9 +17,15 @@
                 <% } %> 
             </div>
             <% if(user){ %> 
-            <form  action="/carrito/add/<%= articulo.id %>" method="post">
-                <input class="carritoDetail" type="submit" value="AÑADIR AL CARRITO"/>
-            </form>
+                <% if (orderConsult !== null) { %>
+                    <form  action="/carrito/delete/<%= articulo.id %>?_method=DELETE" method="post">
+                        <input class="carritoDetail" type="submit" value="QUITAR DEL CARRITO"/>
+                    </form>
+                <% }else{ %>
+                    <form  action="/carrito/add/<%= articulo.id %>" method="post">
+                        <input class="carritoDetail" type="submit" value="AÑADIR AL CARRITO"/>
+                    </form>
+                <% } %>
             <% }else{ %>
             <a href="/carrito"><div class="carritoDetail">AÑADIR AL CARRITO</div></a>
             <% } %>  

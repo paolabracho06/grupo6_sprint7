@@ -30,8 +30,8 @@ const controllerPages = {
     },
     'loginProcess': async(req, res) => {
         let user = await User.findOne({where:{email:req.body.email}})
-        let address = await Address.findOne({where:{user_id:user.dataValues.id}})
             if(user !== null){
+                let address = await Address.findOne({where:{user_id:user.dataValues.id}})
                 let confirm = compareSync(req.body.pass,user.dataValues.pass);
                 if(!confirm){
                     return res.render('pages/login.ejs',{password: !confirm ? "La contraseña ingresada no es correcta" : null, oldEmail: req.body.email})
@@ -44,7 +44,7 @@ const controllerPages = {
                 }
                 return res.redirect("/")                
             }else{
-                res.render('pages/login.ejs',{email: !user ? "El email ingresado no es correcto" : null})
+                res.render('pages/login.ejs',{email: !user ? "El email ingresado no existe" : null})
             }
     },
     'logout': (req,res)=>{

@@ -10,7 +10,7 @@ const controllerCart = {
         let addressConsult = await Address.findOne({where:{id:req.session.address.id}})
         let orderConsult= await db.OrderDetail.findAll({
             where: {user_add_id:addressConsult.dataValues.id},
-            include: ['orders',{association:'products',include:['images']}]
+            include: ['orders',{association:'products',include:['images','discounts']}]
         });
         let promoCodes = await db.UsePromoCode.findAll({
                 include: ['promoCodes'],
