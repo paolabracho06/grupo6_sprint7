@@ -76,13 +76,13 @@ const controllerPages = {
                 })
                 .then(userCreate =>{
                     addressCreate = Address.create({
-                        province: "",
-                        city: "",
-                        street:"",
-                        number:"",
-                        cp:"",         
-                        phone:"",
-                        floor:"",
+                        province: null,
+                        city: null,
+                        street:null,
+                        number:null,
+                        cp:null,         
+                        phone:null,
+                        floor:null,
                         user_id: userCreate.id,
                     })
                     .then(result => res.redirect('/'))
@@ -374,12 +374,20 @@ const controllerPages = {
             description: "Una descripción corta",
             visibility: 1
         }])
-        for(let i=1; i<=12;i++){
-            await db.Image.create({
-                image: "default.jpg",
-                id_products: i
-            })
-        } 
+        await db.Image.bulkCreate([
+            {image: 'default.jpg',id_products: 1},
+            {image: 'default.jpg',id_products: 2},
+            {image: 'default.jpg',id_products: 3},
+            {image: 'default.jpg',id_products: 4},
+            {image: 'default.jpg',id_products: 5},
+            {image: 'default.jpg',id_products: 6},
+            {image: 'default.jpg',id_products: 7},
+            {image: 'default.jpg',id_products: 8},
+            {image: 'default.jpg',id_products: 9},
+            {image: 'default.jpg',id_products: 10},
+            {image: 'default.jpg',id_products: 11},
+            {image: 'default.jpg',id_products: 12},
+        ])
         await db.Payment.bulkCreate([
             {name: "Efectivo"},
             {name: "Tarjeta"},

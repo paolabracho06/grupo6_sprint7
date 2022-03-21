@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Status.init({
-    status: DataTypes.INTEGER
+    status: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Status',
