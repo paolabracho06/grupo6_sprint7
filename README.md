@@ -3,7 +3,7 @@ Este proyecto consiste en desarrollar un e-commerce. En este caso una jugetería
 El objetivo de dichos juguetes es acompañar a los infantes de manera entretenida y divertida a desarrollar su capacidad mental y a la adquisición de conocimientos de forma activa. 
 
 
-[![Whats-App-Image-2021-11-05-at-3-36-17-PM.jpg](https://i.postimg.cc/mZ69ckrv/Whats-App-Image-2021-11-05-at-3-36-17-PM.jpg)](https://postimg.cc/5jLyTxLg)
+[![pdf.jpg](https://i.postimg.cc/FH5hTQMh/pdf.jpg)](https://postimg.cc/F7ptKwF6)
 
 ## Algunos ejemplos de los juguetes :
 - Memotest
